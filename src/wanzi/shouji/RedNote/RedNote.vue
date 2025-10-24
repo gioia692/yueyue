@@ -243,7 +243,7 @@
         "
         @click="sharedState.phone.activeApp = 'QQ'"
       ></div>
-      <div class="market-search">
+      <!-- <div class="market-search">
         <div class="search-box">
           <svg viewBox="0 0 1024 1024" width="16" height="16">
             <path
@@ -254,16 +254,26 @@
           </svg>
           <input type="text" placeholder="搜索商品" />
         </div>
-      </div>
-      <div class="market-cart" @click="sharedState.RedNote.activeTab = 'cart'">
-        <svg viewBox="0 0 1024 1024" width="20" height="20">
-          <path
-            d="M922.9 701.9H327.4l29.9-60.9 496.8-.9c16.8 0 31.2-12 34.2-28.6l68.8-385.1c1.8-10.1-.9-20.3-7.5-28.4-6.6-8.1-16.5-12.9-26.7-12.9l-584.8-.9-12.6-61.2c-3.6-17.6-19.9-30.2-37.9-30.2L89.1 96.8c-19.9 0-36 16.1-36 36s16.1 36 36 36h128.9l155.3 756.7c3.6 17.6 19.9 30.2 37.9 30.2H901c19.9 0 36-16.1 36-36s-16.1-36.1-36-36.1zM384.8 508.9v-.1l-23-107.8h515.4l-56.6 316.8-436.8.9z"
-            fill="#646464"
-          ></path>
-          <path d="M377.9 872.9m-48 0a48 48 0 1 0 96 0 48 48 0 1 0-96 0Z" fill="#646464"></path>
-          <path d="M765.9 872.9m-48 0a48 48 0 1 0 96 0 48 48 0 1 0-96 0Z" fill="#646464"></path>
-        </svg>
+      </div> -->
+      <div class="market-actions">
+        <div class="market-cart" @click="sharedState.RedNote.activeTab = 'cart'">
+          <svg viewBox="0 0 1024 1024" width="20" height="20">
+            <path
+              d="M922.9 701.9H327.4l29.9-60.9 496.8-.9c16.8 0 31.2-12 34.2-28.6l68.8-385.1c1.8-10.1-.9-20.3-7.5-28.4-6.6-8.1-16.5-12.9-26.7-12.9l-584.8-.9-12.6-61.2c-3.6-17.6-19.9-30.2-37.9-30.2L89.1 96.8c-19.9 0-36 16.1-36 36s16.1 36 36 36h128.9l155.3 756.7c3.6 17.6 19.9 30.2 37.9 30.2H901c19.9 0 36-16.1 36-36s-16.1-36.1-36-36.1zM384.8 508.9v-.1l-23-107.8h515.4l-56.6 316.8-436.8.9z"
+              fill="#646464"
+            ></path>
+            <path d="M377.9 872.9m-48 0a48 48 0 1 0 96 0 48 48 0 1 0-96 0Z" fill="#646464"></path>
+            <path d="M765.9 872.9m-48 0a48 48 0 1 0 96 0 48 48 0 1 0-96 0Z" fill="#646464"></path>
+          </svg>
+        </div>
+        <div class="market-backpack" @click="sharedState.RedNote.activeTab = 'backpack'">
+          <svg viewBox="0 0 1024 1024" width="20" height="20">
+            <path
+              d="M832 320h-128v-64c0-70.4-57.6-128-128-128h-128c-70.4 0-128 57.6-128 128v64h-128c-70.4 0-128 57.6-128 128v384c0 70.4 57.6 128 128 128h640c70.4 0 128-57.6 128-128v-384c0-70.4-57.6-128-128-128zM448 256c0-35.2 28.8-64 64-64h128c35.2 0 64 28.8 64 64v64h-256v-64zM192 448h640v64h-640v-64z m640 256v128c0 35.2-28.8 64-64 64h-512v-192h576z m-640 0h448v192h-448c-35.2 0-64-28.8-64-64v-128z"
+              fill="#646464"
+            ></path>
+          </svg>
+        </div>
       </div>
     </div>
 
@@ -395,7 +405,10 @@
         </svg>
       </div>
       <div class="header-title">购物车</div>
-      <div class="header-actions" @click="toggleCartManagement">{{ isManagingCart ? '完成' : '管理' }}</div>
+      <div class="header-actions">
+        <div class="backpack-btn" @click="sharedState.RedNote.activeTab = 'backpack'">背包</div>
+        <div class="manage-btn" @click="toggleCartManagement">{{ isManagingCart ? '完成' : '管理' }}</div>
+      </div>
     </div>
 
     <div class="cart-content">
@@ -466,6 +479,117 @@
       </div>
       <div class="rednote-homepage-bottom-button">消息</div>
       <div class="rednote-homepage-bottom-button">我的</div>
+    </div>
+  </div>
+  <!-- 背包页面 -->
+  <div
+    v-show="sharedState.RedNote.activeTab === 'backpack' && sharedState.phone.activeApp === 'RedNote'"
+    class="backpack-page"
+  >
+    <div class="backpack-header">
+      <div class="back-button" @click="sharedState.RedNote.activeTab = 'market'">
+        <svg viewBox="0 0 1024 1024" width="20" height="20">
+          <path d="M724 218.3L481.9 461.5l240.8 240.8-47.5 47.5L386.9 461.5 676.5 170.8z" fill="#000"></path>
+        </svg>
+      </div>
+      <div class="header-title">我的背包</div>
+      <div class="header-actions"></div>
+    </div>
+
+    <div class="backpack-content">
+      <div v-if="sharedState.RedNote.backpack.length === 0" class="empty-backpack">
+        <div class="empty-icon">🎒</div>
+        <div class="empty-text">背包还是空的</div>
+        <button class="go-shopping" @click="sharedState.RedNote.activeTab = 'market'">去逛逛</button>
+      </div>
+
+      <div v-else class="backpack-items">
+        <div
+          v-for="(item, index) in sharedState.RedNote.backpack"
+          :key="item.id + '-' + index"
+          class="backpack-item"
+          @click="viewBackpackItemDetail(item)"
+        >
+          <div class="item-image" :style="`background-image: url('${item.image}')`"></div>
+          <div class="item-info">
+            <div class="item-title">{{ item.title }}</div>
+            <div class="item-count">数量: {{ item.count || 1 }}</div>
+            <div class="item-seller">{{ item.seller }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 背包页面底部导航 -->
+    <div class="rednote-homepage-bottom">
+      <div class="rednote-homepage-bottom-button" @click="sharedState.RedNote.activeTab = 'home'">首页</div>
+      <div class="rednote-homepage-bottom-button" @click="sharedState.RedNote.activeTab = 'market'">市集</div>
+      <div
+        style="width: 3rem; height: 40px; background-color: #ea3e4a; border-radius: 9px; position: relative"
+        @click="sharedState.phone.activeApp = 'QQ'"
+      >
+        <div
+          style="
+            width: 50%;
+            background-color: white;
+            height: 4px;
+            position: absolute;
+            border-radius: 5px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+          "
+        ></div>
+        <div
+          style="
+            width: 50%;
+            background-color: white;
+            height: 4px;
+            position: absolute;
+            border-radius: 5px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(90deg);
+          "
+        ></div>
+      </div>
+      <div class="rednote-homepage-bottom-button">消息</div>
+      <div class="rednote-homepage-bottom-button">我的</div>
+    </div>
+  </div>
+
+  <!-- 背包物品详情页面 -->
+  <div
+    v-show="sharedState.RedNote.activeBackpackItem && sharedState.phone.activeApp === 'RedNote'"
+    class="backpack-item-detail"
+  >
+    <div class="detail-header">
+      <div class="back-button" @click="sharedState.RedNote.activeBackpackItem = null">
+        <svg viewBox="0 0 1024 1024" width="20" height="20">
+          <path d="M724 218.3L481.9 461.5l240.8 240.8-47.5 47.5L386.9 461.5 676.5 170.8z" fill="#000"></path>
+        </svg>
+      </div>
+      <div class="header-title">物品详情</div>
+      <div class="header-actions"></div>
+    </div>
+
+    <div v-if="sharedState.RedNote.activeBackpackItem" class="detail-content">
+      <div class="item-images">
+        <div
+          class="main-image"
+          :style="`background-image: url('${sharedState.RedNote.activeBackpackItem.image}')`"
+        ></div>
+      </div>
+
+      <div class="item-detail-info">
+        <div class="detail-title">{{ sharedState.RedNote.activeBackpackItem.title }}</div>
+        <div class="detail-desc">{{ sharedState.RedNote.activeBackpackItem.description }}</div>
+        <div class="item-count">数量: {{ sharedState.RedNote.activeBackpackItem.count || 1 }}</div>
+
+        <div class="item-actions">
+          <button class="use-btn" @click="useItem">使用物品</button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -565,11 +689,38 @@ const addToCart = () => {
   }
 };
 
+// 初始化背包
+if (!sharedState.RedNote.backpack) {
+  sharedState.RedNote.backpack = [];
+}
+if (!sharedState.RedNote.activeBackpackItem) {
+  sharedState.RedNote.activeBackpackItem = null;
+}
+
+// 修改购买函数，将购买的商品添加到背包
+const addToBackpack = product => {
+  const existingItem = sharedState.RedNote.backpack.find(item => item.id === product.id);
+  if (existingItem) {
+    // 如果已存在，增加数量
+    existingItem.count = (existingItem.count || 1) + 1;
+  } else {
+    // 如果不存在，添加新物品
+    sharedState.RedNote.backpack.push({
+      ...product,
+      count: 1,
+      purchaseTime: new Date().toISOString(),
+    });
+  }
+};
+
 // 立即购买
 const buyNow = () => {
   if (sharedState.RedNote.activeProduct) {
     const product = sharedState.RedNote.activeProduct;
     const purchaseMessage = `购买了${product.seller}的商品(${product.title}),商品ID(${product.id})，花了${product.price}`;
+
+    // 添加到背包
+    addToBackpack(product);
 
     // 切换到QQ应用
     sharedState.phone.activeApp = 'QQ';
@@ -623,6 +774,9 @@ const buySelectedItems = () => {
     if (index > 0) purchaseMessage += '、';
     purchaseMessage += `购买了${item.seller}的商品(${item.title}),商品ID(${item.id})`;
     totalPrice += parseFloat(item.price.replace('灵石', ''));
+
+    // 添加到背包
+    addToBackpack(item);
   });
 
   purchaseMessage += `，总共花费${totalPrice}灵石`;
@@ -645,6 +799,49 @@ const buySelectedItems = () => {
   sharedState.RedNote.cart = sharedState.RedNote.cart.filter(item => !item.selected);
   // 清空缓存消息
   sharedState.QQ.cacheMsg = [];
+};
+
+// 查看背包物品详情
+const viewBackpackItemDetail = item => {
+  sharedState.RedNote.activeBackpackItem = item;
+};
+
+// 使用物品
+const useItem = () => {
+  if (sharedState.RedNote.activeBackpackItem) {
+    const item = sharedState.RedNote.activeBackpackItem;
+    const useMessage = `使用了${item.title}，${item.description}`;
+
+    // 减少物品数量或移除
+    const backpackItem = sharedState.RedNote.backpack.find(i => i.id === item.id);
+    if (backpackItem) {
+      if (backpackItem.count > 1) {
+        backpackItem.count -= 1;
+      } else {
+        // 如果数量为1，从背包中移除
+        sharedState.RedNote.backpack = sharedState.RedNote.backpack.filter(i => i.id !== item.id);
+      }
+    }
+
+    // 切换到QQ应用
+    sharedState.phone.activeApp = 'QQ';
+
+    // 生成使用消息并设置到输入框
+    if (sharedState.phone.sendModel == '尾附') {
+      const old_content = $('#send_textarea').val().trim();
+      const new_content = old_content + useMessage;
+      $('#send_textarea')
+        .val(new_content.trim() || '')[0]
+        .dispatchEvent(new Event('input', { bubbles: true }));
+    } else {
+      triggerSlash(`/send ${useMessage.trim()}|/trigger`);
+    }
+
+    // 关闭详情页面
+    sharedState.RedNote.activeBackpackItem = null;
+    // 清空缓存消息
+    sharedState.QQ.cacheMsg = [];
+  }
 };
 
 // 删除选中商品
@@ -1249,5 +1446,193 @@ const deleteSelectedItems = () => {
 .slide-fade-leave-to {
   transform: translateX(20px);
   opacity: 0;
+}
+
+/* 市集顶部操作按钮 */
+.market-actions {
+  display: flex;
+  gap: 15px;
+  margin-left: auto;
+}
+
+.market-cart,
+.market-backpack {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+/* 购物车头部操作 */
+.header-actions {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.backpack-btn,
+.manage-btn {
+  color: #ff2e63;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* 背包页面样式 */
+.backpack-page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  z-index: 100;
+  padding-top: 35px;
+  display: flex;
+  flex-direction: column;
+}
+
+.backpack-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 15px;
+  border-bottom: 1px solid #e4e4e4;
+  background: white;
+}
+
+.backpack-content {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.empty-backpack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 15px;
+}
+
+.empty-icon {
+  font-size: 60px;
+}
+
+.empty-text {
+  color: #646464;
+}
+
+.backpack-items {
+  padding: 10px;
+}
+
+.backpack-item {
+  display: flex;
+  padding: 15px;
+  border-bottom: 1px solid #e4e4e4;
+  gap: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.backpack-item:hover {
+  background-color: #f9f9f9;
+}
+
+.backpack-item .item-image {
+  width: 80px;
+  height: 80px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px;
+}
+
+.backpack-item .item-info {
+  flex: 1;
+}
+
+.backpack-item .item-title {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.backpack-item .item-count {
+  color: #ff2e63;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.backpack-item .item-seller {
+  font-size: 12px;
+  color: #646464;
+}
+
+/* 背包物品详情页面 */
+.backpack-item-detail {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  z-index: 200;
+  padding-top: 35px;
+  display: flex;
+  flex-direction: column;
+}
+
+.backpack-item-detail .detail-content {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.backpack-item-detail .item-images {
+  width: 100%;
+  height: 300px;
+}
+
+.backpack-item-detail .main-image {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.backpack-item-detail .item-detail-info {
+  padding: 15px;
+}
+
+.backpack-item-detail .detail-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.backpack-item-detail .detail-desc {
+  font-size: 14px;
+  color: #646464;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+.backpack-item-detail .item-count {
+  font-size: 16px;
+  color: #ff2e63;
+  margin-bottom: 20px;
+}
+
+.backpack-item-detail .item-actions {
+  padding: 15px 0;
+}
+
+.use-btn {
+  width: 100%;
+  padding: 12px;
+  background: #ff2e63;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
 }
 </style>
