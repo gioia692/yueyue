@@ -1,3 +1,5 @@
+<!-- eslint-disable vue/valid-v-for -->
+<!-- eslint-disable vue/require-v-for-key -->
 <template>
   <!-- 首页 -->
   <div
