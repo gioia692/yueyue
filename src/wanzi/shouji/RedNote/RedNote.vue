@@ -814,7 +814,7 @@ const deleteSelectedItems = () => {
 }
 
 .market-search {
-  flex: 1;
+  flex: 0;
 }
 
 .search-box {
