@@ -110,7 +110,11 @@ function parse_configuration(entry: Entry): (_env: any, argv: any) => webpack.Co
     experiments: {
       outputModule: true,
     },
+<<<<<<< HEAD
     devtool: argv.mode === 'production' ? false : 'eval-source-map',
+=======
+    devtool: argv.mode === 'production' ? 'source-map' : 'eval-source-map',
+>>>>>>> fdcb3fcc413e2f1fe11e10b448df6b0e292f5b04
     watchOptions: {
       ignored: ['**/dist', '**/node_modules'],
     },
