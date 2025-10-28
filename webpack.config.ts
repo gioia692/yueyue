@@ -110,7 +110,11 @@ function parse_configuration(entry: Entry): (_env: any, argv: any) => webpack.Co
     experiments: {
       outputModule: true,
     },
+<<<<<<< HEAD
     devtool: argv.mode === 'production' ? false : 'eval-source-map',
+=======
+    devtool: argv.mode === 'production' ? 'source-map' : 'eval-source-map',
+>>>>>>> 67c5de0b4c909d1c4a2e1c1fda91f84c6cd76b42
     watchOptions: {
       ignored: ['**/dist', '**/node_modules'],
     },
@@ -447,6 +451,10 @@ function parse_configuration(entry: Entry): (_env: any, argv: any) => webpack.Co
       const global = {
         jquery: '$',
         lodash: '_',
+<<<<<<< HEAD
+=======
+        showdown: 'showdown',
+>>>>>>> 67c5de0b4c909d1c4a2e1c1fda91f84c6cd76b42
         toastr: 'toastr',
         vue: 'Vue',
         'vue-router': 'VueRouter',

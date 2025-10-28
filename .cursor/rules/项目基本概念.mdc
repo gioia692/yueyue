@@ -137,3 +137,20 @@ $(window).on('pagehide', () => {
   toastr.success('卸载成功');
 });
 ```
+<<<<<<< HEAD
+=======
+
+### 重载前端界面或脚本
+
+如果有完全重载前端界面或脚本的需求, 你应该使用 `window.location.reload()`. 如聊天文件变更时重新载入前端界面或脚本:
+
+```ts
+let chat_id = SillyTavern.getCurrentChatId();
+eventOn(tavern_events.CHAT_CHANGED, new_chat_id => {
+  if (chat_id !== new_chat_id) {
+    chat_id = new_chat_id;
+    window.location.reload();
+  }
+});
+```
+>>>>>>> 67c5de0b4c909d1c4a2e1c1fda91f84c6cd76b42
